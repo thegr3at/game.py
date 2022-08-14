@@ -30,47 +30,23 @@ import random
 
 gamePlayed = int(input("How many games would you like to play? "))
 moves = ["rock", "paper", "scissor", "lizard", "spock"]
+winStates = {"scissor": ["paper", "lizard"],
+              "paper": ["rock", "spock"],
+              "rock": ["lizard", "scissor"],
+              "lizard": ["spock", "paper"],
+              "spock": ["scissor", "rock"]}
 
 for game in range(gamePlayed):
       computer = moves[random.randint(0, 4)]
       player = input("Enter rock, paper, scissors , lizard or spock: ").lower()
+      while player not in moves:
+            print("Please enter a valid input.")
+            player = input("Enter rock, paper, scissors , lizard or spock: ").lower()
       if player == computer:
             print("Tie!")
-      elif player == "rock":
-            if computer == "paper":
-                  print(f"CPU choose")
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "paper":
-            if computer == "scissor":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "scissor":
-            if computer == "rock":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "spock":
-            if computer == "lizard":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "rock":
-            if computer == "spock":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "paper":
-            if computer == "lizard":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
-      elif player == "lizard":
-            if computer == "rock":
-                  print(f"You lose! {computer} beats {player}")
-            else:
-                  print(f"You win! {player} beats {computer}")
+      elif computer in winStates[player]:
+            print(f"You win! {player} beats {computer}")
+      else:
+            print(f"You lose! {computer} beats {player}")
 
 print("\nThank you for playing my game")
